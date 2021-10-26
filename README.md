@@ -467,15 +467,15 @@ Kemudian, edit file `/var/www/super.franky.d05.com/.htaccess` dengan menambahkan
 ```
 
 
-### Konfigurasi Full 1-17:
+# Konfigurasi Full 1-17:
 ## All
 
-# ./.bashrc
+### ./.bashrc
 ```
 /root/config.sh
 ```
 
-# Terminal
+### Terminal
 ```
 chmod +x config.sh
 ```
@@ -483,7 +483,7 @@ chmod +x config.sh
 
 ## EniesLobby
 
-# config.sh
+### config.sh
 ```
 # !/bin/sh
 
@@ -501,7 +501,7 @@ cp /root/2.38.10.in-addr.arpa /etc/bind/kaizoku
 cp /root/named.conf.options /etc/bind
 ```
 
-# named.conf.local
+### named.conf.local
 ```
 zone "franky.IUP1.com" {
         type master;
@@ -522,13 +522,13 @@ zone "2.38.10.in-addr.arpa" {
 };
 ```
 
-#named.conf.options
+### named.conf.options
 ```
         //dnssec-validation auto;
         allow-query{any;};
 ```
 
-# franky.IUP1.com
+### franky.IUP1.com
 ```
 ; BIND data file for local loopback interface
 ;
@@ -549,7 +549,7 @@ ns2     IN      A       10.38.2.3 ; IP Water7
 mecha   IN      NS      ns2
 ```
 
-# super.franky.IUP1.com
+### super.franky.IUP1.com
 ```
 ; BIND data file for local loopback interface
 ;
@@ -566,7 +566,7 @@ $TTL    604800
 www     IN      CNAME   super.franky.IUP1.com.
 ```
 
-# 2.38.10.in-addr.arpa
+### 2.38.10.in-addr.arpa
 ```
 ;
 ; BIND data file for local loopback interface
