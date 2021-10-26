@@ -481,7 +481,7 @@ chmod +x config.sh
 ```
 
 
-## EniesLobby
+## EniesLobby (DNS Master)
 
 ### config.sh
 ```
@@ -581,4 +581,327 @@ $TTL    604800
 ;
 2.38.10.in-addr.arpa.   IN      NS      franky.IUP1.com.
 2       IN      PTR     franky.IUP1.com.
+```
+
+## Water7 (DNS Slave)
+
+### config.sh
+```
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install bind9 -y
+
+cp /root/named.conf.local /etc/bind
+cp /root/named.conf.options /etc/bind
+
+mkdir /etc/bind/sunnygo
+
+cp /root/mecha.franky.IUP1.com /etc/bind/sunnygo
+cp /root/general.mecha.franky.IUP1.com /etc/bind/sunnygo
+```
+
+### named.conf.local
+```
+zone "franky.IUP1.com" {
+        type slave;
+        masters { 10.38.2.2; };
+        file "/var/lib/bind/franky.IUP1.com";
+};
+
+zone "mecha.franky.IUP1.com" {
+            type master;
+            file "/etc/bind/sunnygo/mecha.franky.IUP1.com";
+};
+
+zone "general.mecha.franky.IUP1.com" {
+        type master;
+        file "/etc/bind/sunnygo/general.mecha.franky.IUP1.com";
+};
+```
+
+### named.conf.options
+```
+        //dnssec-validation auto;
+        allow-query{any;};
+```
+
+### mecha.franky.IUP1.com
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     mecha.franky.IUP1.com. root.mecha.franky.IUP1.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      mecha.franky.IUP1.com.
+@       IN      A       10.38.2.4
+www     IN      CNAME   mecha.franky.IUP1.com.
+ns1     IN      A       10.38.2.4 ; IP Skypie
+general IN      NS      ns1
+```
+
+### general.mecha.franky.IUP1.com
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     general.mecha.franky.IUP1.com. root.general.mecha.frank$
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      general.mecha.franky.IUP1.com.
+@       IN      A       10.38.2.4
+www     IN      CNAME   general.mecha.franky.IUP1.com.
+```
+
+## Skypie (Web Server)
+
+### config.sh
+```
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install apache2 -y
+apt-get install php -y
+apt-get install libapache2-mod-php7.0 -y
+apt-get install wget -y
+apt-get install unzip -y
+apt-get install lynx -y
+
+cp franky.IUP1.com.conf /etc/apache2/sites-available
+
+mkdir /var/www/franky.IUP1.com
+
+cp /root/franky/home.html /var/www/franky.IUP1.com
+cp /root/franky/index.php /var/www/franky.IUP1.com
+
+a2ensite franky.IUP1.com
+service apache2 restart
+
+a2enmod rewrite
+service apache2 restart
+
+mkdir /var/www/super.franky.IUP1.com
+
+cp /root/.htaccess /var/www/franky.IUP1.com
+cp super.franky.IUP1.com.conf /etc/apache2/sites-available
+cp super.franky.IUP1.com /var/www
+
+mkdir /var/www/super.franky.IUP1.com/error
+
+mkdir /var/www/super.franky.IUP1.com/public
+mkdir /var/www/super.franky.IUP1.com/public/css
+mkdir /var/www/super.franky.IUP1.com/public/images
+mkdir /var/www/super.franky.IUP1.com/public/js
+
+cp /root/super.franky/error/404.html /var/www/super.franky.IUP1.com/error
+
+cp /root/super.franky/public/css/bro.css /var/www/super.franky.IUP1.com/public/css
+cp /root/super.franky/public/css/edit.css /var/www/super.franky.IUP1.com/public/css
+cp /root/super.franky/public/css/main.css /var/www/super.franky.IUP1.com/public/css
+
+cp /root/super.franky/public/images/background-frank.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/bukanfrankytapirandom.99689 /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/car.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/eyeoffranky.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/fake-franky.jpg234 /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/franky.png /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/frankysupersecretfood.cursed /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/not-franky.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/papa.franky.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/roboto-frankyasdjklkljqwennmn.listingbro /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/stockphotorandomfran.woi /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/whatMatters.jpg /var/www/super.franky.IUP1.com/public/images
+
+cp /root/super.franky/public/js/autocomplete.js /var/www/super.franky.IUP1.com/public/js
+cp /root/super.franky/public/js/js.js /var/www/super.franky.IUP1.com/public/js
+cp /root/super.franky/public/js/reddit.js /var/www/super.franky.IUP1.com/public/js
+
+a2ensite super.franky.IUP1.com
+service apache2 restart
+
+cp general.mecha.franky.IUP1.com.conf /etc/apache2/sites-available
+cp ports.conf /etc/apache2
+
+mkdir /var/www/general.mecha.franky.IUP1.com
+
+cp /root/general.mecha.franky/drag.wav /var/www/general.mecha.franky.IUP1.com
+cp /root/general.mecha.franky/duck-duck-go.jpg /var/www/general.mecha.franky.IUP1.com
+cp /root/general.mecha.franky/f1.png /var/www/general.mecha.franky.IUP1.com
+cp /root/general.mecha.franky/funko-pop.jpg /var/www/general.mecha.franky.IUP1.com
+
+a2ensite general.mecha.franky.IUP1.com
+service apache2 restart
+
+cp 000-default.conf /etc/apache2/sites-available
+```
+
+### franky.IUP1.com.conf
+```
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/franky.IUP1.com
+        ServerName franky.IUP1.com
+        ServerAlias www.franky.IUP1.com
+
+        <Directory /var/www/franky.IUP1.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+### super.franky.IUP1.com.conf
+```
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/super.franky.IUP1.com
+        ServerName super.franky.IUP1.com
+        ServerAlias www.super.franky.IUP1.com
+
+        <Directory /var/www/super.franky.IUP1.com/public>
+                Options +Indexes
+        </Directory>
+
+        <Directory /var/www/super.franky.IUP1.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+
+        ErrorDocument 404 /error/404.html
+
+        Alias "/js" "/var/www/super.franky.IUP1.com/public/js"
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+### general.mecha.franky.IUP1.com.conf
+```
+<VirtualHost *:15000 *:15500>
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/general.mecha.franky.IUP1.com
+        ServerName general.mecha.franky.IUP1.com
+        ServerAlias www.general.mecha.franky.IUP1.com
+
+        <Directory /var/www/general.mecha.franky.IUP1.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+### ports.conf
+```
+# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 80
+Listen 15000
+Listen 15500
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+### 000-default.conf
+```
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+        <Directory /var/www/html>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+## LogueTown (Client 1)
+
+### config.sh
+```
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install lynx -y
+apt-get install dnsutils -y
+cp /root/resolv.conf /etc
+```
+
+### resolv.conf
+```
+#nameserver 192.168.122.1
+nameserver 10.38.2.2
+nameserver 10.38.2.3
+```
+
+## Alabasta (Client 2)
+
+### config.sh
+```
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install lynx -y
+apt-get install dnsutils -y
+cp /root/resolv.conf /etc
+```
+
+### resolv.conf
+```
+#nameserver 192.168.122.1
+nameserver 10.38.2.2
+nameserver 10.38.2.3
 ```
