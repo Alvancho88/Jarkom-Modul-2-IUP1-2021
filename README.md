@@ -93,7 +93,7 @@ Setelah itu pada semua node lainnya ditambahkan command `echo "nameserver 192.16
 
 ## no. 2
 
-membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku
+Membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku
 
 ### Jawab
 
@@ -999,16 +999,16 @@ service apache2 restart
 ps aux | grep ping
 kill -9 [pid]
 
-2 (Done)
+2 
 nameserver pada etc resolv
 ping franky.IUP1.com
 ping www.franky.IUP1.com
 
-3 (Done)
+3 
 ping super.franky.IUP1.com
 ping www.super.franky.IUP1.com
 
-4 (Done)
+4 
 mv 2.10.38.in-addr.arpa 2.38.10.in-addr.arpa
 host -t PTR 10.38.2.2
 
@@ -1086,3 +1086,119 @@ lynx www.super.franky.IUP1.com/images/franky.png
 lynx www.super.franky.IUP1.com/images/franky.jpg
 lynx www.super.franky.IUP1.com/images/not-franky.jpg
 ```
+
+# Screenshots
+
+## Settingan Node
+
+### Foosha
+
+![Screenshot (8947)](https://user-images.githubusercontent.com/61174498/138887114-944d1997-52e8-467a-8788-f0a19a9b3d32.png)
+
+### EniesLobby
+
+![Screenshot (8948)](https://user-images.githubusercontent.com/61174498/138887206-5d17778a-2915-4125-98d8-0f9802adee69.png)
+
+### Water7
+
+![Screenshot (8949)](https://user-images.githubusercontent.com/61174498/138887240-07fff8a1-4c11-4910-ae30-1a932a0c5e1e.png)
+
+### Skypie
+
+![Screenshot (8950)](https://user-images.githubusercontent.com/61174498/138887270-98c956e7-e96c-459f-993a-faacf0350446.png)
+
+### LogueTown
+
+![Screenshot (8951)](https://user-images.githubusercontent.com/61174498/138887292-78647346-5fbc-45ba-841d-16a02d1e8bde.png)
+
+### Alabasta
+
+![Screenshot (8952)](https://user-images.githubusercontent.com/61174498/138887380-6fd94f23-940d-4cad-9b89-b2750cafbd44.png)
+
+## Pengerjaan Soal
+
+### 2
+
+![Screenshot (8995)](https://user-images.githubusercontent.com/61174498/138888229-980f3eb7-beb9-40a9-906a-56b1e1f0c76c.png)
+
+### 3
+
+![Screenshot (8996)](https://user-images.githubusercontent.com/61174498/138888320-facb977a-2f78-4d74-8395-70ef34ea441f.png)
+
+### 4
+
+![Screenshot (8998)](https://user-images.githubusercontent.com/61174498/138888373-417f7645-8410-4592-82e6-f1be2bb5cb9f.png)
+
+### 5
+
+![Screenshot (8999)](https://user-images.githubusercontent.com/61174498/138888436-2b93a635-3d6b-419a-920e-2b8994240981.png)
+
+### 6
+
+![Screenshot (9000)](https://user-images.githubusercontent.com/61174498/138888612-415b82c0-1e72-4d3e-81d6-b10da8248733.png)
+
+### 7
+
+![Screenshot (9001)](https://user-images.githubusercontent.com/61174498/138888649-41e4a730-5aa7-4d87-b83c-da6f7124c9b9.png)
+
+### 8
+
+![Screenshot (9002)](https://user-images.githubusercontent.com/61174498/138888682-427eb161-02f9-40ea-85e8-68de2be0f4fc.png)
+
+### 9
+
+![Screenshot (9004)](https://user-images.githubusercontent.com/61174498/138888826-7f3dda4e-8606-45d9-ad85-b02d80a50cd7.png)
+
+### 10
+
+![Screenshot (9005)](https://user-images.githubusercontent.com/61174498/138888960-14085653-64e6-40fa-9684-b761417a3b5d.png)
+
+### 11
+
+![Screenshot (9007)](https://user-images.githubusercontent.com/61174498/138889082-21f6ec1d-cbd1-44c2-b894-b446799000c9.png)
+
+![Screenshot (9008)](https://user-images.githubusercontent.com/61174498/138889114-279f78c4-2974-4a39-a8bd-fc1e73ea865c.png)
+
+![Screenshot (9011)](https://user-images.githubusercontent.com/61174498/138889146-ad8ca16c-5386-42e1-bf40-e8670db119b4.png)
+
+![Screenshot (9012)](https://user-images.githubusercontent.com/61174498/138889166-d9195167-8485-4163-ae70-32cdc4ff77f9.png)
+
+### 12
+
+![Screenshot (9006)](https://user-images.githubusercontent.com/61174498/138889206-6fc92ef2-458c-40c5-923a-1be9fe61127d.png)
+
+![Screenshot (9013)](https://user-images.githubusercontent.com/61174498/138889234-570c658a-3695-4519-9dc7-d4450da6c805.png)
+
+### 13
+
+![Screenshot (9014)](https://user-images.githubusercontent.com/61174498/138889304-695e086d-cc50-4ec5-bb65-40d4f9c67e86.png)
+
+### 14
+
+![Screenshot (9016)](https://user-images.githubusercontent.com/61174498/138889380-d0737ed8-c7c4-4cab-bd3e-ca1c454b201c.png)
+
+![Screenshot (9017)](https://user-images.githubusercontent.com/61174498/138889426-873121fd-5401-4c77-bc02-e17d701fa4c8.png)
+
+### 15
+
+![Screenshot (9019)](https://user-images.githubusercontent.com/61174498/138889497-498f9c02-fb30-475c-9fb1-bfcefa69d482.png)
+
+![Screenshot (9021)](https://user-images.githubusercontent.com/61174498/138889515-a3d31f9c-3f99-479f-8f88-29cb957d068a.png)
+
+### 16
+
+![Screenshot (9024)](https://user-images.githubusercontent.com/61174498/138889579-aa89c08a-20a9-4c02-985f-739889c6f898.png)
+
+### 17
+
+![Screenshot (9027)](https://user-images.githubusercontent.com/61174498/138889745-e95317d8-6c85-4387-92ef-3f4284de75b0.png)
+
+![Screenshot (9026)](https://user-images.githubusercontent.com/61174498/138889761-9f4e40c4-aa66-4d46-91c5-634e777f5524.png)
+
+# Problems:
+
+a.) Case Sensitive
+b.) Pointing to the wrong Node
+c.) Backup costs a lot of time
+d.) Setting Up costs a lot of time
+e.) Do Lynx Display Images?
