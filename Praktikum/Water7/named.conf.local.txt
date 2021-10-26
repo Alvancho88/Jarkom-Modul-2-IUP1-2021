@@ -1,0 +1,22 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+zone "franky.IUP1.com" {
+        type slave;
+        masters { 10.38.2.2; };
+        file "/var/lib/bind/franky.IUP1.com";
+};
+
+zone "mecha.franky.IUP1.com" {
+            type master;
+            file "/etc/bind/sunnygo/mecha.franky.IUP1.com";
+};
+
+zone "general.mecha.franky.IUP1.com" {
+        type master;
+        file "/etc/bind/sunnygo/general.mecha.franky.IUP1.com";
+};

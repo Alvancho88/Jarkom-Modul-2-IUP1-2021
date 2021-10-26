@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install bind9 -y
+
+cp /root/named.conf.local /etc/bind
+cp /root/named.conf.options /etc/bind
+
+mkdir /etc/bind/sunnygo
+
+cp /root/mecha.franky.IUP1.com /etc/bind/sunnygo
+cp /root/general.mecha.franky.IUP1.com /etc/bind/sunnygo

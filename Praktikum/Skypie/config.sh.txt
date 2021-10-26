@@ -1,0 +1,78 @@
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install apache2 -y
+apt-get install php -y
+apt-get install libapache2-mod-php7.0 -y
+apt-get install wget -y
+apt-get install unzip -y
+apt-get install lynx -y
+
+cp franky.IUP1.com.conf /etc/apache2/sites-available
+
+mkdir /var/www/franky.IUP1.com
+
+cp /root/franky/home.html /var/www/franky.IUP1.com
+cp /root/franky/index.php /var/www/franky.IUP1.com
+
+a2ensite franky.IUP1.com
+service apache2 restart
+
+a2enmod rewrite
+service apache2 restart
+
+mkdir /var/www/super.franky.IUP1.com
+
+cp /root/.htaccess /var/www/franky.IUP1.com
+cp super.franky.IUP1.com.conf /etc/apache2/sites-available
+cp super.franky.IUP1.com /var/www
+
+mkdir /var/www/super.franky.IUP1.com/error
+
+mkdir /var/www/super.franky.IUP1.com/public
+mkdir /var/www/super.franky.IUP1.com/public/css
+mkdir /var/www/super.franky.IUP1.com/public/images
+mkdir /var/www/super.franky.IUP1.com/public/js
+
+cp /root/super.franky/error/404.html /var/www/super.franky.IUP1.com/error
+
+cp /root/super.franky/public/css/bro.css /var/www/super.franky.IUP1.com/public/css
+cp /root/super.franky/public/css/edit.css /var/www/super.franky.IUP1.com/public/css
+cp /root/super.franky/public/css/main.css /var/www/super.franky.IUP1.com/public/css
+
+cp /root/super.franky/public/images/background-frank.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/bukanfrankytapirandom.99689 /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/car.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/eyeoffranky.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/fake-franky.jpg234 /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/franky.png /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/frankysupersecretfood.cursed /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/not-franky.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/papa.franky.jpg /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/roboto-frankyasdjklkljqwennmn.listingbro /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/stockphotorandomfran.woi /var/www/super.franky.IUP1.com/public/images
+cp /root/super.franky/public/images/whatMatters.jpg /var/www/super.franky.IUP1.com/public/images
+
+cp /root/super.franky/public/js/autocomplete.js /var/www/super.franky.IUP1.com/public/js
+cp /root/super.franky/public/js/js.js /var/www/super.franky.IUP1.com/public/js
+cp /root/super.franky/public/js/reddit.js /var/www/super.franky.IUP1.com/public/js
+
+a2ensite super.franky.IUP1.com
+service apache2 restart
+
+cp general.mecha.franky.IUP1.com.conf /etc/apache2/sites-available
+cp ports.conf /etc/apache2
+
+mkdir /var/www/general.mecha.franky.IUP1.com
+
+cp /root/general.mecha.franky/drag.wav /var/www/general.mecha.franky.IUP1.com
+cp /root/general.mecha.franky/duck-duck-go.jpg /var/www/general.mecha.franky.IUP1.com
+cp /root/general.mecha.franky/f1.png /var/www/general.mecha.franky.IUP1.com
+cp /root/general.mecha.franky/funko-pop.jpg /var/www/general.mecha.franky.IUP1.com
+
+a2ensite general.mecha.franky.IUP1.com
+service apache2 restart
+
+cp 000-default.conf /etc/apache2/sites-available

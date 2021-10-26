@@ -1,0 +1,15 @@
+
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install bind9 -y
+
+mkdir /etc/bind/kaizoku
+
+cp /root/named.conf.local /etc/bind
+cp /root/franky.IUP1.com /etc/bind/kaizoku
+cp /root/super.franky.IUP1.com /etc/bind/kaizoku
+cp /root/2.38.10.in-addr.arpa /etc/bind/kaizoku
+cp /root/named.conf.options /etc/bind

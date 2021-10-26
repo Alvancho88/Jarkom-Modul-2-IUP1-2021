@@ -1,0 +1,25 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "franky.IUP1.com" {
+        type master;
+        notify yes;
+        also-notify { 10.38.2.3; };
+        allow-transfer { 10.38.2.3; };
+        file "/etc/bind/kaizoku/franky.IUP1.com";
+};
+
+zone "super.franky.IUP1.com" {
+        type master;
+        file "/etc/bind/kaizoku/super.franky.IUP1.com";
+};
+
+zone "2.38.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/kaizoku/2.38.10.in-addr.arpa";
+};
