@@ -467,3 +467,119 @@ Kemudian, edit file `/var/www/super.franky.d05.com/.htaccess` dengan menambahkan
 ```
 
 ![17.2]
+
+###Konfigurasi Full 1-17:
+##All
+
+#./.bashrc
+```
+/root/config.sh
+```
+
+#Terminal
+```
+chmod +x config.sh
+```
+
+
+##EniesLobby
+
+#config.sh
+```
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install bind9 -y
+
+mkdir /etc/bind/kaizoku
+
+cp /root/named.conf.local /etc/bind
+cp /root/franky.IUP1.com /etc/bind/kaizoku
+cp /root/super.franky.IUP1.com /etc/bind/kaizoku
+cp /root/2.38.10.in-addr.arpa /etc/bind/kaizoku
+cp /root/named.conf.options /etc/bind
+```
+
+#named.conf.local
+```
+zone "franky.IUP1.com" {
+        type master;
+        notify yes;
+        also-notify { 10.38.2.3; };
+        allow-transfer { 10.38.2.3; };
+        file "/etc/bind/kaizoku/franky.IUP1.com";
+};
+
+zone "super.franky.IUP1.com" {
+        type master;
+        file "/etc/bind/kaizoku/super.franky.IUP1.com";
+};
+
+zone "2.38.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/kaizoku/2.38.10.in-addr.arpa";
+};
+```
+
+#named.conf.options
+```
+        //dnssec-validation auto;
+        allow-query{any;};
+```
+
+#franky.IUP1.com
+```
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     franky.IUP1.com. root.franky.IUP1.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      franky.IUP1.com.
+@       IN      A       10.38.2.4 ; IP Skypie
+www     IN      CNAME   franky.IUP1.com.
+ns1     IN      A       10.38.2.4 ; IP Skypie
+super   IN      NS      ns1
+ns2     IN      A       10.38.2.3 ; IP Water7
+mecha   IN      NS      ns2
+```
+
+#super.franky.IUP1.com
+```
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     super.franky.IUP1.com. root.super.franky.IUP1.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      super.franky.IUP1.com.
+@       IN      A       10.38.2.4
+www     IN      CNAME   super.franky.IUP1.com.
+```
+
+#2.38.10.in-addr.arpa
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     franky.IUP1.com. root.franky.IUP1.com. (
+                2021100401              ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+2.38.10.in-addr.arpa.   IN      NS      franky.IUP1.com.
+2       IN      PTR     franky.IUP1.com.
+```
