@@ -160,6 +160,7 @@ Pertama, menambahkan zone pada `/etc/bind/named.conf.local` dengan menambahkan:
 
 
 
+
 Lalu copy `/etc/bind/db.local` menjadi `/etc/bind/kaizoku/2.38.10.in-addr.arpa`. Lalu konfigurasi file tersebut agar memiliki SOA `franky.IUP1.com.`,`2.38.10.in-addr.arpa.` yang memiliki NS `franky.IUP1.com.`, dan `2` yang merupakan byte ke-4 IP EniesLobby memiliki PTR `franky.IUP1.com.`.
 
 
