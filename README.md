@@ -1,37 +1,79 @@
 # Jarkom-Modul-2-IUP1-2021
 
-# Praktikum Modul 2
+## Group Member Name:
+1. (05111942000010) Agustinus Aldi Irawan
+2. (05111942000017) Juan Carlos Tepanus Pardosi
+3. (05111942000028) Salma Izzatul Islam
 
-## Pendahuluan
-
-### Setting Topologi
-
-
-
-### Edit Konfigurasi Network
+## Set The Topology (Edit Network Configuration)
 
 #### Foosha (Router)
+``` 
+auto eth0
+iface eth0 inet dhcp
 
+auto eth1
+iface eth1 inet static
+	address 10.38.1.1
+	netmask 255.255.255.0
 
+auto eth2
+iface eth2 inet static
+	address 10.38.2.1
+	netmask 255.255.255.0 
+ ```
 
 #### EniesLobby (DNS Master)
+```
+auto eth0
+iface eth0 inet static
+	address 10.38.2.2
+	netmask 255.255.255.0
+	gateway 10.38.2.1
 
+```
 
 
 #### Water7 (DNS Slave)
+```
+auto eth0
+iface eth0 inet static
+	address 10.38.2.3
+	netmask 255.255.255.0
+	gateway 10.38.2.1
 
+```
 
 
 #### Skypie (Web Server)
+```
+auto eth0
+iface eth0 inet static
+	address 10.38.2.4
+	netmask 255.255.255.0
+	gateway 10.38.2.1
 
+```
 
 
 #### Loguetown (Client)
-
-
+```
+auto eth0
+iface eth0 inet static
+	address 10.38.1.2
+	netmask 255.255.255.0
+	gateway 10.38.1.1
+```
 
 #### Alabasta (Client)
+```
+auto eth0
+iface eth0 inet static
+	address 10.38.1.3
+	netmask 255.255.255.0
+	gateway 10.38.1.1
 
+```
 
 
 ## no. 1
