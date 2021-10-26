@@ -1,0 +1,21 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "jarkom2021.com" {
+    type master;
+    notify yes;
+    also-notify { 10.38.2.3; }; // Masukan IP Water7 tanpa tanda petik
+    allow-transfer { 10.38.2.3; }; // Masukan IP Water7 tanpa tanda petik
+    file "/etc/bind/jarkom/jarkom2021.com";
+};
+
+zone "2.38.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/jarkom/2.38.10.in-addr.arpa";
+    allow-transfer { 10.38.2.3; }; // Masukan IP Water7 tanpa tanda petik
+};

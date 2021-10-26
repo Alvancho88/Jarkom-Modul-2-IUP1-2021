@@ -1,0 +1,66 @@
+Water7
+ls
+000-default.conf   index.php            named.conf.options
+about.php          its.jarkom2021.com   ports.conf
+config.sh          jarkom2021.com.conf  .htaccess
+default-8080.conf  named.conf.local
+
+nano .bashrc di root (paling bawah kasih:)
+/root/config.sh
+
+chmod +x config.sh
+
+nano config.sh
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+apt-get update
+apt-get install bind9 -y
+
+cp /root/named.conf.local /etc/bind
+service bind9 restart
+cp /root/named.conf.options /etc/bind
+mkdir /etc/bind/delegasi
+cp /root/its.jarkom2021.com /etc/bind/delegasi
+
+apt-get install apache2
+service apache2 start
+
+apt-get install php
+apt-get install libapache2-mod-php7.0
+
+cp /root/000-default.conf /etc/apache2/sites-available
+mkdir /var/www/html
+cp /root/index.php /var/www/html
+cp /root/default-8080.conf /etc/apache2/sites-available
+cp /root/ports.conf /etc/apache2
+
+a2ensite default-8080.conf
+service apache2 restart
+
+mkdir /var/www/web-8080
+cp /root/index.php /var/www/web-8080
+cp /root/jarkom2021.com.conf /etc/apache2/sites-available
+
+a2ensite jarkom2021.com
+service apache2 restart
+
+mkdir /var/www/jarkom2021.com
+cp /root/index.php /var/www/jarkom2021.com
+
+mkdir /var/www/jarkom2021.com/data
+mkdir /var/www/jarkom2021.com/download
+mkdir /var/www/jarkom2021.com/download/img
+mkdir /var/www/jarkom2021.com/assets
+mkdir /var/www/jarkom2021.com/assets/javascript
+
+cd /var/www/jarkom2021.com/assets/javascript
+touch app.js
+
+a2enmod rewrite
+service apache2 restart
+
+cp /root/.htaccess /var/www/jarkom2021.com
+cp /root/about.php /var/www/jarkom2021.com/
+service apache2 restart

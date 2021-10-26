@@ -1,0 +1,18 @@
+Loguetown
+ls
+config.sh  resolv.conf
+
+nano .bashrc di root (paling bawah kasih:)
+/root/config.sh
+
+chmod +x config.sh
+
+#!/bin/sh
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install dnsutils
+cp /root/resolv.conf /etc
+
+
+service bind9 restart

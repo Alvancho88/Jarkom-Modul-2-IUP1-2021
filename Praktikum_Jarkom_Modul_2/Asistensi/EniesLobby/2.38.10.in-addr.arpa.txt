@@ -1,0 +1,13 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     jarkom2021.com. root.jarkom2021.com. (
+                              4         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+2.38.10.in-addr.arpa.   IN      NS      jarkom2021.com.
+3       IN      PTR     jarkom2021.com.
