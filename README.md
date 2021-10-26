@@ -440,7 +440,7 @@ Kemudian, edit file `/etc/apache2/sites-available/000-default.conf` dengan menam
     </Directory>
 ```
 
-![16.2]
+
 
 ## no. 17
 
@@ -457,7 +457,7 @@ Pertama, edit file `/etc/apache2/sites-available/super.franky.d05.com.conf` deng
     </Directory>
 ```
 
-![17.1]
+
 
 Kemudian, edit file `/var/www/super.franky.d05.com/.htaccess` dengan menambahkan:
 
@@ -478,8 +478,23 @@ Kemudian, edit file `/var/www/super.franky.d05.com/.htaccess` dengan menambahkan
 ### Terminal
 ```
 chmod +x config.sh
+
+EniesLobby & Water7
+service bind9 restart
+service bind9 stop
+
+Skypie
+service apache2 restart
+
+ps aux | grep ping
+kill -9 [pid]
 ```
 
+## Foosha (Router)
+### ./.bashrc
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.38.0.0/16
+```
 
 ## EniesLobby (DNS Master)
 
@@ -864,6 +879,34 @@ Listen 15500
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 ```
 
+### nano /var/www/franky.IUP1.com/.htaccess
+```
+    RewriteEngine On
+    RewriteRule ^home$ index.php/home
+```
+
+### nano /var/www/general.mecha.franky.IUP1.com/.htaccess
+```
+    AuthType Basic
+    AuthName "Restricted Content"
+    AuthUserFile /etc/apache2/.htpasswd
+    Require valid-user
+```
+
+### nano /var/www/html/.htaccess
+```
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{HTTP_HOST} ^10\.38\.2\.4$
+    RewriteRule ^(.*)$ http://www.franky.IUP1.com [L,R=301]
+```
+
+### nano /var/www/super.franky.IUP1.com/.htaccess
+```
+    RewriteEngine On
+    RewriteRule ^(.*)franky(.*)\.(jpg|gif|png)$ http://super.franky.IUP1.com/public/images/franky.png [L,R]
+```
+
 ## LogueTown (Client 1)
 
 ### config.sh
@@ -904,4 +947,104 @@ cp /root/resolv.conf /etc
 #nameserver 192.168.122.1
 nameserver 10.38.2.2
 nameserver 10.38.2.3
+```
+
+### Testing
+```
+1
+EniesLobby & Water7
+service bind9 restart
+
+Skypie
+service apache2 restart
+
+ps aux | grep ping
+kill -9 [pid]
+
+2 (Done)
+nameserver pada etc resolv
+ping franky.IUP1.com
+ping www.franky.IUP1.com
+
+3 (Done)
+ping super.franky.IUP1.com
+ping www.super.franky.IUP1.com
+
+4 (Done)
+mv 2.10.38.in-addr.arpa 2.38.10.in-addr.arpa
+host -t PTR 10.38.2.2
+
+5
+EniesLobby
+service bind9 stop
+
+Water7
+service bind9 restart
+
+ping franky.IUP1.com
+
+6
+ping mecha.franky.IUP1.com
+ping www.mecha.franky.IUP1.com
+
+7
+ping general.mecha.franky.IUP1.com
+ping www.general.mecha.franky.IUP1.com
+
+8
+lynx franky.IUP1.com
+
+9
+lynx www.franky.IUP1.com/home
+
+nano /var/www/franky.IUP1.com/.htaccess
+    RewriteEngine On
+    RewriteRule ^home$ index.php/home
+
+10, 11, 12
+lynx www.super.franky.IUP1.com
+11 listing (public)
+12 error
+
+13
+lynx www.super.franky.IUP1.com/js
+
+14
+lynx www.general.mecha.franky.IUP1.com (error)
+lynx http://10.38.2.4:15000
+
+15
+lynx http://10.38.2.4:15000
+
+htpasswd -c /etc/apache2/.htpasswd luffy
+Masukkan password
+nano /var/www/general.mecha.franky.IUP1.com/.htaccess
+    AuthType Basic
+    AuthName "Restricted Content"
+    AuthUserFile /etc/apache2/.htpasswd
+    Require valid-user
+
+16
+lynx 10.38.2.4
+lynx franky.IUP1.com
+
+nano /var/www/html/.htaccess
+
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{HTTP_HOST} ^10\.38\.2\.4$
+    RewriteRule ^(.*)$ http://www.franky.IUP1.com [L,R=301]
+
+17
+nano /etc/apache2/sites-available/super.franky.IUP1.com.conf
+
+nano /var/www/super.franky.IUP1.com/.htaccess
+
+    RewriteEngine On
+    RewriteRule ^(.*)franky(.*)\.(jpg|gif|png)$ http://super.franky.IUP1.com/public/images/franky.png [L,R]
+
+lynx www.super.franky.IUP1.com/images/franky
+lynx www.super.franky.IUP1.com/images/franky.png
+lynx www.super.franky.IUP1.com/images/franky.jpg
+lynx www.super.franky.IUP1.com/images/not-franky.jpg
 ```
