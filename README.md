@@ -85,10 +85,10 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 Menjalankan command `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.38.0.0/16` yang digunakan supaya dapat terhubung ke jaringan luar pada router `Foosha`
 
 
-Kemudian menambahkan command `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.38.0.0/16` ke `/root/.bashrc` agar dijalankan setiap kali project distart dengan command `echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.38.0.0/16" >> /root/.bashrc`
+Kemudian menambahkan command `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.38.0.0/16` ke `/root/.bashrc` agar dijalankan setiap kali project distart.
 
 
-Setelah itu pada semua node lainnya ditambahkan command `echo "nameserver 192.168.122.0"` untuk setting IP DNS ke `/root/.bashrc` agar dijalankan setiap kali project distart dengan command `echo 'echo "nameserver 192.168.122.1" > /etc/resolv.conf' >> /root/.bashrc`
+Setelah itu pada semua node lainnya ditambahkan command `echo nameserver 192.168.122.1 > /etc/resolv.conf"` agar dapat terhubung dengan router Foosha dan melakukan hal seperti update dan instalasi
 
 
 ## no. 2
